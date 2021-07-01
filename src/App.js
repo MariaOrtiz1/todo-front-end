@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+// removed the logo because we no longer need it
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  // useParams
+} from "react-router-dom";
+import HomePage from "./HomePage";
+import LoginPage from "./LoginPage";
+import SignUpPage from "./SignUpPage";
+import TodosPage from "./TodosPage";
+
+// Params are placeholders in the URL that begin
+// with a colon, like the `:id` param defined in
+// the route in this example. A similar convention
+// is used for matching dynamic segments in other
+// popular web frameworks like Rails and Express.
+
+export default class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <h2>Header</h2>
+          <Switch>
+            <Route 
+              path="/" 
+              exact
+              render={(routerProps) => <HomePage {...routerProps} />} 
+              />  
+            <Route 
+              path="/signup" 
+              exact
+              render={(routerProps) => <SignUpPage {...routerProps} />} 
+            />  
+            <Route 
+              path="/login" 
+              exact
+              render={(routerProps) => <LoginPage {...routerProps} />} 
+            /> 
+            <Route 
+              path="/todos" 
+              exact
+              render={(routerProps) => <TodosPage {...routerProps} />} 
+            />              
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
-
-export default App;
